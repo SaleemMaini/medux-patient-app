@@ -1,3 +1,9 @@
+import { HomeHeroSection } from "./hero-section";
+
 export const HomePageView = () => {
-  return <p>sss</p>;
+  return (
+    <div style={{ height: "200vh" }}>
+      <HomeHeroSection />
+    </div>
+  );
 };

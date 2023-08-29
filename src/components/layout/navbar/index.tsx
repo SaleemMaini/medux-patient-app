@@ -22,7 +22,7 @@ export const Navbar = () => {
   ];
 
   return (
-    <div className="navbar bg-base-100 sticky top-0 z-50 px-10 ">
+    <div className="navbar  sticky top-0 z-50 px-10 bg-base-100">
       <div className="navbar-start">
         {/* Mobile dropdown */}
         <div className="dropdown">

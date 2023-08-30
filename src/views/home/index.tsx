@@ -1,9 +1,11 @@
 import { HomeHeroSection } from "./hero-section";
+import { SpecializationsSection } from "./specializations-section";
 
 export const HomePageView = () => {
   return (
-    <div style={{ height: "200vh" }}>
+    <div>
       <HomeHeroSection />
+      <SpecializationsSection />
     </div>
   );
 };

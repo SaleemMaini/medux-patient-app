@@ -10,9 +10,21 @@ export const SpecializationsSection = () => {
       description: 'lorem ipsum dolor sit amet, consectetur adipiscing'
     },
     {
-      id: 1,
+      id: 2,
       img: '/images/specializations/eye.jpg',
       name: 'Eyes',
+      description: 'lorem ipsum dolor sit amet, consectetur adipiscing'
+    },
+    {
+      id: 3,
+      img: '/images/specializations/child.jpeg',
+      name: 'children',
+      description: 'lorem ipsum dolor sit amet, consectetur adipiscing'
+    },
+    {
+      id: 4,
+      img: '/images/specializations/brain.jpeg',
+      name: 'Brain',
       description: 'lorem ipsum dolor sit amet, consectetur adipiscing'
     }
   ]

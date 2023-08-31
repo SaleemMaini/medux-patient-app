@@ -1,5 +1,6 @@
 export type Specialization = {
-  img: string;
-  name: string;
-  description: string;
-};
+  img: string
+  name: string
+  id: number
+  description: string
+}

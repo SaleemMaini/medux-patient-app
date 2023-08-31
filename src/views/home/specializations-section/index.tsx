@@ -26,6 +26,18 @@ export const SpecializationsSection = () => {
       img: '/images/specializations/brain.jpeg',
       name: 'Brain',
       description: 'lorem ipsum dolor sit amet, consectetur adipiscing'
+    },
+    {
+      id: 5,
+      img: '/images/specializations/bones.jpg',
+      name: 'Bones',
+      description: 'lorem ipsum dolor sit amet, consectetur adipiscing'
+    },
+    {
+      id: 6,
+      img: '/images/specializations/ear.jpeg',
+      name: 'Ear, Nose and Throat',
+      description: 'lorem ipsum dolor sit amet, consectetur adipiscing'
     }
   ]
 

@@ -8,7 +8,7 @@ type Props = {
 export const DoctorCard = (props: Props) => {
   // ** Props
   const { data } = props
-  const { avatar, name, description } = data
+  const { avatar, name, description, location, specialization } = data
 
   return (
     <div className='card w-full bg-base-100 shadow-xl min-h-fit text-center cursor-pointer hover:-translate-y-2 transition duration-200'>
@@ -25,12 +25,12 @@ export const DoctorCard = (props: Props) => {
         <div className='flex items-center gap-1 justify-between'>
           <div className='flex items-center gap-1'>
             <FaUserDoctor />
-            <span>Child</span>
+            <span>{specialization.name}</span>
           </div>
 
           <div className='flex items-center gap-1'>
             <FaLocationDot />
-            <span>Alwaar, Homs</span>
+            <span>{location}</span>
           </div>
         </div>
 

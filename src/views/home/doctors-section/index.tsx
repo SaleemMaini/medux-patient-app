@@ -8,6 +8,7 @@ export const DoctorsSection = () => {
       avatar: '/images/doctors/doctor-1.jpg',
       name: 'John Doe',
       description: 'lorem ipsum dolor sit amet, consectetur adipiscing',
+      location: 'Alwaar, Homs',
       specialization: {
         id: 1,
         name: 'dentist'
@@ -17,14 +18,16 @@ export const DoctorsSection = () => {
       id: 2,
       avatar: '/images/doctors/doctor-2.jpg',
       name: 'Smith Doe',
+      location: 'Dablan, Homs',
       description: 'lorem ipsum dolor sit amet, consectetur adipiscing',
       specialization: {
         id: 2,
-        name: 'eyes'
+        name: 'brain'
       }
     },
     {
       id: 3,
+      location: 'Malki, Damascus',
       avatar: '/images/doctors/doctor-3.jpg',
       name: 'Ahmad Abdo',
       description: 'lorem ipsum dolor sit amet, consectetur adipiscing',
@@ -35,6 +38,7 @@ export const DoctorsSection = () => {
     },
     {
       id: 4,
+      location: 'Hmdani, Aleppo',
       avatar: '/images/doctors/doctor-4.jpg',
       name: 'Sameer Khaled',
       description: 'lorem ipsum dolor sit amet, consectetur adipiscing',

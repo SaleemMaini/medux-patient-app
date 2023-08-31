@@ -21,9 +21,9 @@ const config: Config = {
       {
         light: {
           ...require("daisyui/src/theming/themes")["[data-theme=light]"],
-          primary: "#3366FF",
-          secondary: "#090E34",
-          "primary-focus": "mediumblue",
+          primary: "#00ACB1",
+          secondary: "#005963",
+          "primary-content": "#FFF",
         },
       },
     ],

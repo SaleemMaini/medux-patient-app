@@ -1,6 +1,5 @@
-import { HomePageView } from "@/views/home";
-import { useEffect } from "react";
+import { HomePageView } from '@/views/home'
 
 export default function Home() {
-  return <HomePageView />;
+  return <HomePageView />
 }

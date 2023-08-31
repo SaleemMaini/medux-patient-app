@@ -1,24 +1,19 @@
+import { SearchBox } from './search-box'
+
 export const HomeHeroSection = () => {
   return (
     <div
-      className="hero h-96"
+      className='hero min-h-screen indicator min-w-full'
       style={{
-        backgroundImage:
-          "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
+        backgroundImage: 'url(/images/hero-section-banner-2.jpg)'
       }}
     >
-      <div className="hero-overlay bg-opacity-60"></div>
-      <div className="hero-content text-center text-neutral-content">
-        <div className="max-w-md">
-          <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-          <p className="mb-5">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p>
-          <button className="btn btn-primary">Get Started</button>
-        </div>
+      <div className='indicator-item indicator-middle indicator-center  min-w-full min-h-full hero-overlay bg-opacity-20'></div>
+
+      {/* Search Box */}
+      <div className='indicator-item indicator-middle indicator-center w-8/12 min-h-fit'>
+        <SearchBox />
       </div>
     </div>
-  );
-};
+  )
+}

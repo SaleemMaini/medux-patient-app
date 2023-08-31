@@ -1,4 +1,5 @@
 import { Select } from '@/components/select'
+import { BsSearch } from 'react-icons/bs'
 
 export const SearchBox = () => {
   // ** Vars
@@ -23,7 +24,10 @@ export const SearchBox = () => {
           {/* District Select */}
           <Select options={specializationsOptions} placeholder='Choose District' />
 
-          <button className='btn btn-primary'>Book Now</button>
+          <button className='btn btn-primary'>
+            Search
+            <BsSearch size="20" />
+          </button>
         </div>
       </div>
     </div>

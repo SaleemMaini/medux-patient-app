@@ -13,8 +13,8 @@ export const SpecializationCard = (props: Props) => {
   return (
     <div className='card w-full bg-base-100 shadow-xl min-h-fit hover:-translate-y-2 transition duration-200 cursor-pointer'>
       {/* Image */}
-      <div className='h-44'>
-        <img src={img} alt={name} className='object-cover h-48 w-full rounded-t-2xl' />
+      <div className='h-48'>
+        <img src={img} alt={name} className='object-cover h-full w-full rounded-t-2xl' />
       </div>
 
       {/* Card Body */}

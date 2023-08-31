@@ -11,16 +11,25 @@ export const DoctorCard = (props: Props) => {
   const { avatar, name, description } = data
 
   return (
-    <div className='card w-full bg-base-100 shadow-xl min-h-fit'>
-      <div className='h-44'>
-        <img src={avatar} alt={name} className='object-cover h-48 w-full rounded-t-2xl' />
+    <div className='card w-full bg-base-100 shadow-xl min-h-fit text-center cursor-pointer'>
+      {/* Avatar */}
+      <div className='h-80'>
+        <img src={avatar} alt={name} className='object-cover h-full w-full rounded-t-2xl' />
       </div>
-      <div className='card-body'>
-        <h2 className='card-title'>{name}</h2>
+
+      <div className='card-body '>
+        {/* Name */}
+        <h2 className='card-title text-center justify-center'>{name}</h2>
+
+        {/* Location */}
+
+        {/* Description */}
         <p>{description}</p>
-        <div className='card-actions justify-end'>
-          <button className='btn btn-primary'>
-            Explore
+
+        {/* Call To Action */}
+        <div className='card-actions'>
+          <button className='btn btn-primary w-full'>
+            Book Appointment
             <FaArrowRight />
           </button>
         </div>

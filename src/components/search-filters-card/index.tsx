@@ -2,11 +2,14 @@
 import { FiltersOptions, SearchMetadata } from '@/types/search'
 import { useState } from 'react'
 import { SpecializationFilter } from './specialization-filter'
+import { GenderFilter } from './gender-filter'
+import { Gender } from '@/types/others'
 
 export const SearchFiltersCard = () => {
   // ** States
   const [selectedFiltersOption, setSelectedFiltersOptions] = useState<FiltersOptions>({
-    specializations: []
+    specializations: [],
+    gender: []
   })
 
   // ** Vars
@@ -28,9 +31,24 @@ export const SearchFiltersCard = () => {
   // ** Handlers
   const onChangeSpecializationFilter = (id: number) => {
     const oldArray = selectedFiltersOption.specializations
-    const newArray = oldArray?.length ? [...oldArray, id] : [id]
+    if (oldArray.includes(id)) {
+      const index = oldArray.findIndex(v => v === id)
+      oldArray.splice(index, 1)
+    }
 
+    const newArray = oldArray?.length ? [...oldArray, id] : [id]
     setSelectedFiltersOptions(s => ({ ...s, specializations: newArray }))
+  }
+
+  const onChangeGenderFilter = (type: Gender) => {
+    const oldArray = selectedFiltersOption.gender
+    if (oldArray.includes(type)) {
+      const index = oldArray.findIndex(v => v === type)
+      oldArray.splice(index, 1)
+    }
+
+    const newArray = oldArray?.length ? [...oldArray, type] : [type]
+    setSelectedFiltersOptions(s => ({ ...s, gender: newArray }))
   }
 
   return (
@@ -40,6 +58,13 @@ export const SearchFiltersCard = () => {
         data={metadata.specializations}
         onChangeSpecializationFilter={onChangeSpecializationFilter}
       />
+      <p>{selectedFiltersOption.specializations}</p>
+
+      {/* Divider */}
+      <div className='divider' />
+
+      <GenderFilter onChangeGenderFilter={onChangeGenderFilter} selectedGender={selectedFiltersOption.gender} />
+      <p>{selectedFiltersOption.gender}</p>
     </div>
   )
 }

@@ -34,6 +34,10 @@ export const SearchFiltersCard = () => {
     if (oldArray.includes(id)) {
       const index = oldArray.findIndex(v => v === id)
       oldArray.splice(index, 1)
+
+      setSelectedFiltersOptions(s => ({ ...s, specializations: oldArray }))
+
+      return
     }
 
     const newArray = oldArray?.length ? [...oldArray, id] : [id]
@@ -45,6 +49,10 @@ export const SearchFiltersCard = () => {
     if (oldArray.includes(type)) {
       const index = oldArray.findIndex(v => v === type)
       oldArray.splice(index, 1)
+
+      setSelectedFiltersOptions(s => ({ ...s, gender: oldArray }))
+
+      return
     }
 
     const newArray = oldArray?.length ? [...oldArray, type] : [type]
@@ -58,13 +66,11 @@ export const SearchFiltersCard = () => {
         data={metadata.specializations}
         onChangeSpecializationFilter={onChangeSpecializationFilter}
       />
-      <p>{selectedFiltersOption.specializations}</p>
 
       {/* Divider */}
       <div className='divider' />
 
       <GenderFilter onChangeGenderFilter={onChangeGenderFilter} selectedGender={selectedFiltersOption.gender} />
-      <p>{selectedFiltersOption.gender}</p>
     </div>
   )
 }

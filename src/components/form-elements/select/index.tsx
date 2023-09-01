@@ -18,7 +18,11 @@ export const Select = (props: Props) => {
         {placeholder}
       </option>
       {options.map(opt => {
-        return <option value={opt.value}>{opt.label}</option>
+        return (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
+        )
       })}
     </select>
   )

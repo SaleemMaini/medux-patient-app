@@ -1,8 +1,7 @@
 import { DoctorCard } from '@/components/doctors/doctor-card'
-import { Doctor } from '@/types/doctors'
 
-export const DoctorsSection = () => {
-  const doctors: Doctor[] = [
+export const SearchResultsSection = () => {
+  const searchResults = [
     {
       id: 1,
       avatar: '/images/doctors/doctor-1.jpg',
@@ -50,20 +49,11 @@ export const DoctorsSection = () => {
   ]
 
   return (
-    <div className='py-20 min-h-full bg-base-200'>
-      <div className='container'>
-        {/* Title */}
-        <div className='flex gap-3 items-center mb-7'>
-          <span className='w-10 border-b-4 border-primary block' />
-          <h2 className='text-2xl	font-extrabold'>Meet The Top And Best Rated Doctors</h2>
-        </div>
-
-        {/* Doctors */}
-        <div className='grid grid-cols-4 gap-8'>
-          {doctors.map(d => {
-            return <DoctorCard key={d.id} data={d} />
-          })}
-        </div>
+    <div className='py-10'>
+      <div className='grid grid-cols-2 gap-5'>
+        {searchResults.map(d => {
+          return <DoctorCard key={d.id} data={d} />
+        })}
       </div>
     </div>
   )

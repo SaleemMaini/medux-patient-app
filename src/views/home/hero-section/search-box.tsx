@@ -1,4 +1,4 @@
-import { Select } from '@/components/select'
+import { Select } from '@/components/form-elements/select'
 import { BsSearch } from 'react-icons/bs'
 
 export const SearchBox = () => {
@@ -26,7 +26,7 @@ export const SearchBox = () => {
 
           <button className='btn btn-primary'>
             Search
-            <BsSearch size="20" />
+            <BsSearch size='20' />
           </button>
         </div>
       </div>

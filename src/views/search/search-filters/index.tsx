@@ -1,7 +1,9 @@
+import { SearchFiltersCard } from '@/components/search-filters-card'
+
 export const SearchFilters = () => {
   return (
-    <div className='bg-purple-500 p-10'>
-      <p> SearchFilters</p>
+    <div className='p-10 h-full'>
+      <SearchFiltersCard />
     </div>
   )
 }

@@ -50,7 +50,7 @@ export const DoctorsSection = () => {
   ]
 
   return (
-    <div className='px-10 py-20 min-h-full'>
+    <div className='px-10 py-20 min-h-full bg-base-200'>
       {/* Title */}
       <div className='flex gap-3 items-center mb-7'>
         <span className='w-10 border-b-4 border-primary block' />
@@ -59,8 +59,8 @@ export const DoctorsSection = () => {
 
       {/* Doctors */}
       <div className='grid grid-cols-4 gap-8'>
-        {doctors.map(s => {
-          return <DoctorCard data={s} />
+        {doctors.map(d => {
+          return <DoctorCard key={d.id} data={d} />
         })}
       </div>
     </div>

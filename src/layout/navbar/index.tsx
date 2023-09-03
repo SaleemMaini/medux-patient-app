@@ -12,10 +12,6 @@ export const Navbar = () => {
       title: 'home'
     },
     {
-      href: '/doctors',
-      title: 'doctors'
-    },
-    {
       href: '/search',
       title: 'search'
     }

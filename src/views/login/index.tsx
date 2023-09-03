@@ -16,8 +16,6 @@ export const LoginPageView = () => {
     setLoginInputs(prevState => ({ ...prevState, [field]: value }))
   }
 
-  console.log('liginInputs', loginInputs)
-
   return (
     <div className='hero min-h-screen bg-base-200'>
       <div className='hero-content flex-col lg:flex-row-reverse'>

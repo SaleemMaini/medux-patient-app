@@ -1,11 +1,13 @@
 import { SearchPageLayoutView } from '@/views/search/layout'
 
-const SearchPageLayout = () => {
-  return (
-    <div>
-      <SearchPageLayoutView />
-    </div>
-  )
+type Props = {
+  children: React.ReactNode
+}
+const SearchPageLayout = (props: Props) => {
+  // ** Props
+  const { children } = props
+
+  return <SearchPageLayoutView>{children}</SearchPageLayoutView>
 }
 
 export default SearchPageLayout

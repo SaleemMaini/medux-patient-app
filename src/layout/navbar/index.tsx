@@ -49,7 +49,7 @@ export const Navbar = () => {
 
         {/* Logo */}
         <Link href='/' className=''>
-          <img src={'/images/logo/logo-colored.svg'} width='50%' />
+          <img src={'/images/logo/logo-colored.svg'} width='50%' alt='logo' />
         </Link>
       </div>
 

@@ -1,20 +1,14 @@
-import { SearchFilters } from '../search-filters'
-import { SearchResultsSection } from '../search-results'
+type Props = {
+  children: React.ReactNode
+}
 
-export const SearchPageLayoutView = () => {
+export const SearchPageLayoutView = (props: Props) => {
+  // ** Props
+  const { children } = props
+
   return (
     <div className='bg-base-200'>
-      <div className='flex flex-row min-h-screen container'>
-        {/* Search Results */}
-        <div className='w-full'>
-          <SearchResultsSection />
-        </div>
-
-        {/* Search Filters */}
-        <div className='basis-1/2'>
-          <SearchFilters />
-        </div>
-      </div>
+      <div className='flex flex-row min-h-screen container'>{children}</div>
     </div>
   )
 }

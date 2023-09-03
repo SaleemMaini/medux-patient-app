@@ -42,7 +42,7 @@ export const SpecializationsSection = () => {
   ]
 
   return (
-    <div className='bg-primary  py-20 min-h-full -mt-1.5'>
+    <div className='bg-primary  py-20 min-h-full -mt-2'>
       <div className='container'>
         {/* Title */}
         <div className='flex gap-3 items-center mb-7 text-white'>

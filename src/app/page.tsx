@@ -1,5 +1,7 @@
-import { HomePageView } from '@/views/home'
+import { redirect } from 'next/navigation'
 
 export default function Home() {
-  return <HomePageView />
+  redirect('/home')
+
+  return null
 }

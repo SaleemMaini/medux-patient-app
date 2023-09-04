@@ -1,5 +1,3 @@
 export const DoctorPageView = () => {
-    return (
-        <p>DoctorPageView</p>
-    )
+  return <p>DoctorPageView</p>
 }

@@ -6,5 +6,7 @@ export type Doctor = {
   name: string
   location: string
   description: string
+  slug: string
+  gender: 'male' | 'female'
   specialization: Pick<Specialization, 'id' | 'name'>
 }

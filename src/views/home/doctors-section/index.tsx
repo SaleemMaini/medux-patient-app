@@ -67,7 +67,7 @@ export const DoctorsSection = () => {
         </div>
 
         {/* Doctors */}
-        <div className='grid grid-cols-4 gap-8'>
+        <div className='grid grid-cols-4 gap-4'>
           {doctors.map(d => {
             return <DoctorCard key={d.id} data={d} />
           })}

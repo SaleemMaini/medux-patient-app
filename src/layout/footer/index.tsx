@@ -1,6 +1,6 @@
 export const Footer = () => {
   return (
-    <footer className='footer items-center p-4 bg-neutral text-neutral-content'>
+    <footer className='footer items-center py-4 px-12 bg-neutral text-neutral-content'>
       <img src={'/images/logo/logo-white.svg'} width='24%' alt="logo" />
 
       <div className='grid-flow-col gap-4 md:place-self-center md:justify-self-end items-center'>

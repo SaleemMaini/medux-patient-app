@@ -2,3 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+.select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+}

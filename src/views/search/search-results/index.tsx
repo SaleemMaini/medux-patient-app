@@ -1,7 +1,8 @@
 import { DoctorCard } from '@/components/doctors/doctor-card'
+import { Doctor } from '@/types/doctors'
 
 export const SearchResultsSection = () => {
-  const searchResults = [
+  const searchResults: Doctor[] = [
     {
       id: 1,
       avatar: '/images/doctors/doctor-1.jpg',
@@ -11,7 +12,9 @@ export const SearchResultsSection = () => {
       specialization: {
         id: 1,
         name: 'dentist'
-      }
+      },
+      gender: 'male',
+      slug: 'john-doe'
     },
     {
       id: 2,
@@ -22,7 +25,9 @@ export const SearchResultsSection = () => {
       specialization: {
         id: 2,
         name: 'brain'
-      }
+      },
+      gender: 'male',
+      slug: 'smith-doe'
     },
     {
       id: 3,
@@ -33,7 +38,9 @@ export const SearchResultsSection = () => {
       specialization: {
         id: 3,
         name: 'eyes'
-      }
+      },
+      gender: 'male',
+      slug: 'ahmad-abdo'
     },
     {
       id: 4,
@@ -44,7 +51,9 @@ export const SearchResultsSection = () => {
       specialization: {
         id: 4,
         name: 'children'
-      }
+      },
+      gender: 'male',
+      slug: 'sameer-khaled'
     }
   ]
 

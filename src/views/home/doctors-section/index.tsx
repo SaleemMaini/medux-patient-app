@@ -12,7 +12,9 @@ export const DoctorsSection = () => {
       specialization: {
         id: 1,
         name: 'dentist'
-      }
+      },
+      gender: 'male',
+      slug: 'john-doe'
     },
     {
       id: 2,
@@ -23,7 +25,9 @@ export const DoctorsSection = () => {
       specialization: {
         id: 2,
         name: 'brain'
-      }
+      },
+      gender: 'male',
+      slug: 'smith-doe'
     },
     {
       id: 3,
@@ -34,7 +38,9 @@ export const DoctorsSection = () => {
       specialization: {
         id: 3,
         name: 'eyes'
-      }
+      },
+      gender: 'male',
+      slug: 'ahmad-abdo'
     },
     {
       id: 4,
@@ -45,7 +51,9 @@ export const DoctorsSection = () => {
       specialization: {
         id: 4,
         name: 'children'
-      }
+      },
+      gender: 'male',
+      slug: 'sameer-khaled'
     }
   ]
 
@@ -53,13 +61,13 @@ export const DoctorsSection = () => {
     <div className='py-20 min-h-full bg-base-200'>
       <div className='container'>
         {/* Title */}
-        <div className='flex gap-3 items-center mb-7'>
+        <div className='flex gap-2 items-center mb-7'>
           <span className='w-10 border-b-4 border-primary block' />
           <h2 className='text-2xl	font-extrabold'>Meet The Top And Best Rated Doctors</h2>
         </div>
 
         {/* Doctors */}
-        <div className='grid grid-cols-4 gap-8'>
+        <div className='grid grid-cols-4 gap-4'>
           {doctors.map(d => {
             return <DoctorCard key={d.id} data={d} />
           })}

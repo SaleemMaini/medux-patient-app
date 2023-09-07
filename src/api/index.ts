@@ -8,7 +8,7 @@ const onRequest = (config: InternalAxiosRequestConfig): InternalAxiosRequestConf
     return config
   }
 
-  const accessToken = window.localStorage.getItem('accessToken')
+  const accessToken = window.localStorage.getItem('token')
 
   if (accessToken) {
     config.headers.authorization = `Bearer ${accessToken}`

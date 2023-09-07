@@ -1,7 +1,9 @@
 'use client'
 
+import { useAuth } from '@/app/hooks/useAuth'
 import { TextInput } from '@/components/form-elements/text-input'
 import { LoginInputs } from '@/types/others'
+import { useMutation } from '@tanstack/react-query'
 import { useState } from 'react'
 
 export const LoginPageView = () => {
@@ -11,9 +13,25 @@ export const LoginPageView = () => {
     password: ''
   })
 
+  // ** Hooks
+  const { login } = useAuth()
+  const mutation = useMutation({
+    mutationFn: () => {
+      return login(loginInputs)
+    }
+  })
+
+  // ** Conditions
+  const disableLogin = !loginInputs.email || !loginInputs.password
+
   // ** Handlers
   const onChangeLoginInput = (value: string, field: 'email' | 'password') => {
     setLoginInputs(prevState => ({ ...prevState, [field]: value }))
+  }
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+    mutation.mutate()
   }
 
   return (
@@ -29,30 +47,34 @@ export const LoginPageView = () => {
         </div>
 
         {/* Login Form */}
-        <div className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100'>
-          <div className='card-body'>
-            {/* Email */}
-            <TextInput
-              label='Email'
-              placeholder='johndoe@gmail.com'
-              value={loginInputs.email}
-              onChange={val => onChangeLoginInput(val, 'email')}
-            />
+        <form onSubmit={handleSubmit}>
+          <div className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100'>
+            <div className='card-body'>
+              {/* Email */}
+              <TextInput
+                label='Email'
+                placeholder='johndoe@gmail.com'
+                value={loginInputs.email}
+                onChange={val => onChangeLoginInput(val, 'email')}
+              />
 
-            {/* Password */}
-            <TextInput
-              label='Password'
-              type='password'
-              value={loginInputs.password}
-              onChange={val => onChangeLoginInput(val, 'password')}
-            />
+              {/* Password */}
+              <TextInput
+                label='Password'
+                type='password'
+                value={loginInputs.password}
+                onChange={val => onChangeLoginInput(val, 'password')}
+              />
 
-            {/* Login Button */}
-            <div className='form-control mt-4'>
-              <button className='btn btn-primary'>Login</button>
+              {/* Login Button */}
+              <div className='form-control mt-4'>
+                <button className='btn btn-primary' type='submit' disabled={disableLogin}>
+                  Login
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   )

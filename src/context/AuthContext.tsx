@@ -2,13 +2,13 @@
 import { createContext, useEffect, useState, ReactNode } from 'react'
 
 // ** Next Import
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 // ** Axios
 import { axios } from '@/api'
 
 // ** Types
-import { AuthValuesType, LoginParams, ErrCallbackType, UserDataType } from './types'
+import { AuthValuesType, LoginParams, UserDataType } from './types'
 
 // ** Defaults
 const defaultProvider: AuthValuesType = {
@@ -53,11 +53,11 @@ const AuthProvider = ({ children }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleLogin = (params: LoginParams, errorCallback?: ErrCallbackType) => {
+  const handleLogin = (params: LoginParams): Promise<any> =>
     axios
       .post('/', {
-        query: `mutation LoginDoctor {
-          loginDoctor(
+        query: `mutation LoginPatient {
+          loginPatient(
             email: "${params.email}",
             password: "${params.password}",
             device_name: "web"
@@ -65,13 +65,13 @@ const AuthProvider = ({ children }: Props) => {
       }`
       })
       .then(async loginResponse => {
-        const token = loginResponse.data.data.loginDoctor.replace(' Token: ', '')
+        const token = loginResponse.data.data.loginPatient.replace(' Token: ', '')
         window.localStorage.setItem('token', token)
 
         await axios
           .post('/', {
-            query: `query MeD {
-              meD {
+            query: `query MeP {
+              meP {
                   id
                   name
                   email
@@ -79,18 +79,13 @@ const AuthProvider = ({ children }: Props) => {
           }`
           })
           .then(async getDataResponse => {
-            setUser({ ...getDataResponse.data.data.meD })
-            window.localStorage.setItem('userData', JSON.stringify(getDataResponse.data.data.meD))
+            setUser({ ...getDataResponse.data.data.meP })
+            window.localStorage.setItem('userData', JSON.stringify(getDataResponse.data.data.meP))
           })
 
         setLoading(false)
         router.replace('/')
       })
-
-      .catch(err => {
-        if (errorCallback) errorCallback(err)
-      })
-  }
 
   const handleLogout = () => {
     setUser(null)

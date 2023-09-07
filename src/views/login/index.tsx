@@ -2,6 +2,7 @@
 
 import { useAuth } from '@/app/hooks/useAuth'
 import { TextInput } from '@/components/form-elements/text-input'
+import { Button } from '@/components/ui/button'
 import { LoginInputs } from '@/types/others'
 import { useMutation } from '@tanstack/react-query'
 import { useState } from 'react'
@@ -68,9 +69,9 @@ export const LoginPageView = () => {
 
               {/* Login Button */}
               <div className='form-control mt-4'>
-                <button className='btn btn-primary' type='submit' disabled={disableLogin}>
+                <Button disabled={disableLogin} loading={mutation.isLoading} type='submit'>
                   Login
-                </button>
+                </Button>
               </div>
             </div>
           </div>

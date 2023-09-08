@@ -1,8 +1,7 @@
-export type AvailableTime = {
-  id: number
-  status: 'available' | 'not_available'
-  availibletime: {
-    id: number
-    availibleTime: Date
+export type WorkingHours = {
+  [day: string] : {
+    active: "0" | "1"
+    from: string
+    to: string
   }
 }

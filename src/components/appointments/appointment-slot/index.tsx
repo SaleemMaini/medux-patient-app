@@ -7,13 +7,13 @@ type Props = {
   isSelected: boolean
   onClick: () => void
 }
-export const AvailableTimeSlot = (props: Props) => {
+export const AppointmentSlot = (props: Props) => {
   // ** Props
   const { date, disabled, isSelected, onClick } = props
 
   return (
     <button
-      className={clsx('btn btn-primary', {
+      className={clsx('btn btn-primary h-20', {
         'btn-outline': !isSelected
       })}
       disabled={disabled}
@@ -21,7 +21,7 @@ export const AvailableTimeSlot = (props: Props) => {
     >
       {date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
       {/* Check icon */}
-      {isSelected ? <FaRegSquareCheck size='18' /> : null}
+      {isSelected ? <FaRegSquareCheck size='22' /> : null}
     </button>
   )
 }

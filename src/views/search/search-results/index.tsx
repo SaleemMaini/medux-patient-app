@@ -57,10 +57,10 @@ export const SearchResultsSection = () => {
     <div className='py-10'>
       {/* Title */}
       <p className='text-xl font-semibold'>Search Results:</p>
-      <span>{searchResults.length} doctors found</span>
+      <span >{searchResults.length} results found</span>
 
       {/* Doctors */}
-      <div className='grid grid-cols-2 gap-5'>
+      <div className='grid grid-cols-2 gap-5 mt-2'>
         {searchResults.map(d => {
           return <DoctorCard key={d.id} data={d} />
         })}

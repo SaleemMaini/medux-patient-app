@@ -161,7 +161,7 @@ export const PickAppointmentCard = () => {
       {bookAppointmentMutation.isSuccess ? (
         <Alert
           text={`your appointment at (${bookAppointmentMutation.data.data.data.createAppointment.date}) booked successfully.`}
-          className="mt-3"
+          className='mt-3'
           type='success'
         />
       ) : null}

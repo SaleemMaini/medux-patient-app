@@ -1,22 +1,21 @@
 'use client'
-import { WorkingHours } from '@/types/appointments'
-import { useEffect, useState } from 'react'
+import { Slot, WorkingHours } from '@/types/appointments'
+import { useState } from 'react'
 import moment from 'moment'
 import { generateAppointmentsSlotsDatesRange } from '../utils'
 
 type Props = {
   workingHours: WorkingHours
-  appointments: any
 }
 
 export const useAppointmentsSlots = (props: Props) => {
   // ** Props
-  const { appointments, workingHours } = props
+  const { workingHours } = props
 
   // ** States
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date())
-  const [selectedSlot, setSelectedSlot] = useState<Date | null>(null)
-  const [slots, setSlots] = useState<Date[]>([])
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null)
+  const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null)
+  const [slots, setSlots] = useState<Slot[]>([])
 
   // ** Vars
   const appointmentAverageTime = 30
@@ -45,9 +44,17 @@ export const useAppointmentsSlots = (props: Props) => {
     const lastSlotAsDate = new Date(
       date.setHours(getHours(dayWorkingHours['to']), getMinutes(dayWorkingHours['to']), 0)
     )
+    const dates = generateAppointmentsSlotsDatesRange(firstSlotAsDate, lastSlotAsDate, appointmentAverageTime)
+    const slotsArr: Slot[] = []
 
-    isWorkingDay(date) &&
-      setSlots(generateAppointmentsSlotsDatesRange(firstSlotAsDate, lastSlotAsDate, appointmentAverageTime))
+    dates.forEach(gDate => {
+      slotsArr.push({
+        date: gDate,
+        isBooked: false
+      })
+    })
+
+    setSlots(slotsArr)
   }
 
   const onChangeSelectedDate = (date: Date) => {
@@ -58,20 +65,6 @@ export const useAppointmentsSlots = (props: Props) => {
     handleGenerateAppointmentSlots(date)
   }
 
-  const isAvailableSlot = (slot: Date): boolean => {
-    return Boolean(
-      appointments.find((ap: any) => {
-        return new Date(ap.date).getTime() === slot.getTime()
-      })
-    )
-  }
-
-  useEffect(() => {
-    isWorkingDay(new Date()) && handleGenerateAppointmentSlots(new Date())
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
   return {
     slots,
     selectedDate,
@@ -79,6 +72,6 @@ export const useAppointmentsSlots = (props: Props) => {
     setSelectedSlot,
     onChangeSelectedDate,
     isWorkingDay,
-    isAvailableSlot
+    handleGenerateAppointmentSlots
   }
 }

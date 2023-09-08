@@ -11,3 +11,18 @@ export const bookAppointment = ({ date, doctorId }: { date: string; doctorId: nu
 }`
   })
 }
+
+export const getDoctorAppointments = (doctorId: number) => {
+  return axios.post(`/`, {
+    query: `query Doctor {
+      doctor(id: "${doctorId}") {
+          appointments {
+              id
+              date
+          }
+          workingHours
+      }
+  }
+  `
+  })
+}

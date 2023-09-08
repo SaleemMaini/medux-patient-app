@@ -1,8 +1,12 @@
 'use client'
 
+import { useAuth } from '@/app/hooks/useAuth'
 import { TextInput } from '@/components/form-elements/text-input'
+import { Button } from '@/components/ui/button'
 import { LoginInputs } from '@/types/others'
-import { useState } from 'react'
+import { useMutation } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 export const LoginPageView = () => {
   // ** States
@@ -11,10 +15,33 @@ export const LoginPageView = () => {
     password: ''
   })
 
+  // ** Hooks
+  const { isLoggedIn, login } = useAuth()
+  const mutation = useMutation({
+    mutationFn: () => {
+      return login(loginInputs)
+    }
+  })
+  const router = useRouter()
+
+  // ** Conditions
+  const disableLogin = !loginInputs.email || !loginInputs.password
+
   // ** Handlers
   const onChangeLoginInput = (value: string, field: 'email' | 'password') => {
     setLoginInputs(prevState => ({ ...prevState, [field]: value }))
   }
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+    mutation.mutate()
+  }
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push('/')
+    }
+  }, [isLoggedIn, router])
 
   return (
     <div className='hero min-h-screen bg-base-200'>
@@ -29,30 +56,34 @@ export const LoginPageView = () => {
         </div>
 
         {/* Login Form */}
-        <div className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100'>
-          <div className='card-body'>
-            {/* Email */}
-            <TextInput
-              label='Email'
-              placeholder='johndoe@gmail.com'
-              value={loginInputs.email}
-              onChange={val => onChangeLoginInput(val, 'email')}
-            />
+        <form onSubmit={handleSubmit}>
+          <div className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100'>
+            <div className='card-body'>
+              {/* Email */}
+              <TextInput
+                label='Email'
+                placeholder='johndoe@gmail.com'
+                value={loginInputs.email}
+                onChange={val => onChangeLoginInput(val, 'email')}
+              />
 
-            {/* Password */}
-            <TextInput
-              label='Password'
-              type='password'
-              value={loginInputs.password}
-              onChange={val => onChangeLoginInput(val, 'password')}
-            />
+              {/* Password */}
+              <TextInput
+                label='Password'
+                type='password'
+                value={loginInputs.password}
+                onChange={val => onChangeLoginInput(val, 'password')}
+              />
 
-            {/* Login Button */}
-            <div className='form-control mt-4'>
-              <button className='btn btn-primary'>Login</button>
+              {/* Login Button */}
+              <div className='form-control mt-4'>
+                <Button disabled={disableLogin} loading={mutation.isLoading} type='submit'>
+                  Login
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   )

@@ -11,11 +11,14 @@ export const metadata: Metadata = {
 
 // ** Styles imports
 import 'react-datepicker/dist/react-datepicker.css'
+import Providers from './providers'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en' data-theme='light'>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   )
 }

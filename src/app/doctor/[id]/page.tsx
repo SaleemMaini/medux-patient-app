@@ -12,8 +12,7 @@ const DoctorPage = () => {
       id: 3,
       name: 'eyes'
     },
-    gender: 'male',
-    slug: 'ahmad-abdo'
+    gender: 'male'
   }
 
   return <DoctorPageView doctorData={doctorData} />

@@ -9,10 +9,10 @@ type Props = {
 export const DoctorCard = (props: Props) => {
   // ** Props
   const { data } = props
-  const { avatar, name, description, location, specialization, slug } = data
+  const { id, avatar, name, description, location, specialization } = data
 
   return (
-    <Link href={`/doctor/${slug}`}>
+    <Link href={`/doctor/${id}`}>
       <div className='card w-full bg-base-100 shadow-xl min-h-fit text-center cursor-pointer hover:-translate-y-2 transition duration-200'>
         {/* Avatar */}
         <div className='h-80'>

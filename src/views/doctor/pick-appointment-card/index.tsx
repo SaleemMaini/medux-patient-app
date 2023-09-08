@@ -3,58 +3,75 @@ import DatePicker from 'react-datepicker'
 import { WorkingHours } from '@/types/appointments'
 import { AppointmentSlot } from '@/components/appointments/appointment-slot'
 import { useAppointmentsSlots } from '@/app/hooks/useAppointmentsSlots'
+import { useAuth } from '@/app/hooks/useAuth'
+import { useRouter, useParams } from 'next/navigation'
+import { useMutation } from '@tanstack/react-query'
+import { bookAppointment } from '@/api/appointments'
+import moment from 'moment'
+import { Button } from '@/components/ui/button'
+import toast from 'react-hot-toast'
+
+const workingHours: WorkingHours = {
+  mo: {
+    active: '0',
+    from: '10:30',
+    to: '10:30'
+  },
+  tu: {
+    active: '1',
+    from: '09:30',
+    to: '10:30'
+  },
+  we: {
+    active: '1',
+    from: '09:30',
+    to: '10:30'
+  },
+  th: {
+    active: '1',
+    from: '03:30',
+    to: '09:30'
+  },
+  fr: {
+    active: '1',
+    from: '09:00',
+    to: '14:00'
+  },
+  su: {
+    active: '1',
+    from: '09:00',
+    to: '09:30'
+  },
+  sa: {
+    active: '0',
+    from: '09:00',
+    to: '14:00'
+  }
+}
+
+const appointments = [
+  {
+    date: '2023-09-8 09:00'
+  }
+]
 
 export const PickAppointmentCard = () => {
   // ** Hooks
-  const workingHours: WorkingHours = {
-    mo: {
-      active: '0',
-      from: '10:30',
-      to: '10:30'
-    },
-    tu: {
-      active: '1',
-      from: '09:30',
-      to: '10:30'
-    },
-    we: {
-      active: '1',
-      from: '09:30',
-      to: '10:30'
-    },
-    th: {
-      active: '1',
-      from: '03:30',
-      to: '09:30'
-    },
-    fr: {
-      active: '1',
-      from: '09:00',
-      to: '14:00'
-    },
-    su: {
-      active: '1',
-      from: '09:00',
-      to: '09:30'
-    },
-    sa: {
-      active: '0',
-      from: '09:00',
-      to: '14:00'
+  const bookAppointmentMutation = useMutation({
+    mutationFn: bookAppointment,
+    onSuccess: () => {
+      console.log("sss")
+      toast.success('booked successfully!')
     }
-  }
-
-  const appointments = [
-    {
-      date: '2023-09-8 09:00'
-    }
-  ]
-
+  })
   const { slots, selectedDate, setSelectedSlot, onChangeSelectedDate, selectedSlot, isWorkingDay, isAvailableSlot } =
     useAppointmentsSlots({
       appointments,
       workingHours
     })
+  const { isLoggedIn } = useAuth()
+  const router = useRouter()
+  const params = useParams()
 
   // ** Handlers
   const onSelectSlot = (slot: any) => {
@@ -62,7 +79,16 @@ export const PickAppointmentCard = () => {
   }
 
   const handleBookAppointment = () => {
-    console.log('ss')
+    if (!isLoggedIn) {
+      router.push('/login')
+    }
+
+    if (selectedSlot && params.id) {
+      bookAppointmentMutation.mutate({
+        date: moment(selectedSlot).format('YYYY-MM-DD HH:mm:ss'),
+        doctorId: Number(params.id)
+      })
+    }
   }
 
   return (
@@ -79,6 +105,7 @@ export const PickAppointmentCard = () => {
             className='btn btn-primary outline-none  my-4'
             minDate={new Date()}
             filterDate={isWorkingDay}
+            disabled={bookAppointmentMutation.isLoading}
           />
         </div>
       </div>
@@ -87,14 +114,14 @@ export const PickAppointmentCard = () => {
       {slots.length ? (
         <div className='grid grid-cols-8 gap-4 mt-2 transition ease-in-out  duration-100 '>
           {slots.map((slot, idx) => {
-            const isAvailable = isAvailableSlot(slot)
+            const isNotAvailable = isAvailableSlot(slot)
             const isSelected = selectedSlot === slot
 
             return (
               <AppointmentSlot
                 key={idx}
                 date={slot}
-                disabled={isAvailable}
+                disabled={isNotAvailable || bookAppointmentMutation.isLoading}
                 isSelected={isSelected}
                 onClick={() => onSelectSlot(slot)}
               />
@@ -122,9 +149,9 @@ export const PickAppointmentCard = () => {
 
       {/* Book Now Button */}
       <div className='divider mt-12'>
-        <button className='btn btn-primary ' onClick={handleBookAppointment} disabled={!selectedSlot}>
+        <Button loading={bookAppointmentMutation.isLoading} onClick={handleBookAppointment} disabled={!selectedSlot}>
           Book Now
-        </button>
+        </Button>
       </div>
     </div>
   )

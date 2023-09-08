@@ -13,8 +13,7 @@ export const SearchResultsSection = () => {
         id: 1,
         name: 'dentist'
       },
-      gender: 'male',
-      slug: 'john-doe'
+      gender: 'male'
     },
     {
       id: 2,
@@ -26,8 +25,7 @@ export const SearchResultsSection = () => {
         id: 2,
         name: 'brain'
       },
-      gender: 'male',
-      slug: 'smith-doe'
+      gender: 'male'
     },
     {
       id: 3,
@@ -39,8 +37,7 @@ export const SearchResultsSection = () => {
         id: 3,
         name: 'eyes'
       },
-      gender: 'male',
-      slug: 'ahmad-abdo'
+      gender: 'male'
     },
     {
       id: 4,
@@ -52,8 +49,7 @@ export const SearchResultsSection = () => {
         id: 4,
         name: 'children'
       },
-      gender: 'male',
-      slug: 'sameer-khaled'
+      gender: 'male'
     }
   ]
 

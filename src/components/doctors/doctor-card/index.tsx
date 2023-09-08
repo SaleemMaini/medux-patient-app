@@ -9,7 +9,10 @@ type Props = {
 export const DoctorCard = (props: Props) => {
   // ** Props
   const { data } = props
-  const { id, avatar, name, description, location, specialization } = data
+  const { id, avatar, name, summary, city, district, specialization } = data
+
+  // ** Vars
+  const location = `${district?.name}, ${city.name}`
 
   return (
     <Link href={`/doctor/${id}`}>
@@ -36,8 +39,8 @@ export const DoctorCard = (props: Props) => {
             </div>
           </div>
 
-          {/* Description */}
-          <p>{description}</p>
+          {/* summary */}
+          <p>{summary}</p>
 
           {/* Call To Action */}
           <div className='card-actions'>

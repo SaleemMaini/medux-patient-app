@@ -1,6 +1,6 @@
 type Option = {
   label: string
-  value: string
+  value: string | number
 }
 
 type Props = {

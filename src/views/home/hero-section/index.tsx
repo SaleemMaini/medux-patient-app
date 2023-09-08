@@ -1,6 +1,15 @@
+import { City } from '@/types/others'
 import { SearchBox } from './search-box'
+import { Specialization } from '@/types/specializations'
 
-export const HomeHeroSection = () => {
+type Props = {
+  cities: City[]
+  specializations: Specialization[]
+}
+export const HomeHeroSection = (props: Props) => {
+  // ** Props
+  const { cities, specializations } = props
+
   return (
     <div
       className='hero min-h-screen indicator min-w-full'
@@ -12,7 +21,7 @@ export const HomeHeroSection = () => {
 
       {/* Search Box */}
       <div className='indicator-item indicator-middle indicator-center w-8/12 min-h-fit'>
-        <SearchBox />
+        <SearchBox cities={cities} specializations={specializations} />
       </div>
     </div>
   )

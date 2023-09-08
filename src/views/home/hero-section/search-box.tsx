@@ -1,13 +1,19 @@
 import { Select } from '@/components/form-elements/select'
+import { City } from '@/types/others'
+import { Specialization } from '@/types/specializations'
 import { BsSearch } from 'react-icons/bs'
 
-export const SearchBox = () => {
+type Props = {
+  cities: City[]
+  specializations: Specialization[]
+}
+export const SearchBox = (props: Props) => {
+  // ** Props
+  const { cities, specializations } = props
+
   // ** Vars
-  const specializationsOptions = [
-    { label: 'spec1', value: 'spec1' },
-    { label: 'spec2', value: 'spec2' },
-    { label: 'spec3', value: 'spec3' }
-  ]
+  const specializationsOptions = specializations.map(sp => ({ label: sp.name, value: sp.id }))
+  const citiesOptions = cities.map(c => ({ label: c.name, value: c.id }))
 
   return (
     <div className='card w-full bg-base-100 shadow-xl'>
@@ -19,7 +25,7 @@ export const SearchBox = () => {
           <Select options={specializationsOptions} placeholder='Choose Specialization' />
 
           {/* City Select */}
-          <Select options={specializationsOptions} placeholder='Choose City' />
+          <Select options={citiesOptions} placeholder='Choose City' />
 
           {/* District Select */}
           <Select options={specializationsOptions} placeholder='Choose District' />

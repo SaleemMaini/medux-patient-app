@@ -51,9 +51,15 @@ export const PickAppointmentCard = () => {
     sa: {
       active: '0',
       from: '09:00',
-      to: '09:30'
+      to: '14:00'
     }
   }
+
+  const appointments = [
+    {
+      date: '2023-09-15 09:00'
+    }
+  ]
 
   const appointmentAverageTime = 30
 
@@ -97,7 +103,7 @@ export const PickAppointmentCard = () => {
             selected={selectedDate}
             onChange={date => date && onChangeSelectedDate(date)}
             showMonthDropdown
-            className='btn btn-primary outline-none btn-outline my-4'
+            className='btn btn-primary outline-none  my-4'
             minDate={new Date()}
           />
         </div>
@@ -107,16 +113,16 @@ export const PickAppointmentCard = () => {
       {slots.length ? (
         <div className='grid grid-cols-8 gap-4 mt-2 transition ease-in-out  duration-100 '>
           {slots.map((slot, idx) => {
-            // check is available appointments includes slot
-            // const isAvailable = avt.status === 'available'
-
+            const isAvailable = appointments.find((ap: any) => {
+              return new Date(ap.date).getTime() === slot.getTime()
+            })
             const isSelected = selectedSlot === slot
 
             return (
               <AppointmentSlot
                 key={idx}
                 date={slot}
-                disabled={false}
+                disabled={Boolean(isAvailable)}
                 isSelected={isSelected}
                 onClick={() => onSelectSlot(slot)}
               />

@@ -1,22 +1,11 @@
 'use client'
-import { useState } from 'react'
 import DatePicker from 'react-datepicker'
 import { WorkingHours } from '@/types/appointments'
-import moment from 'moment'
-import { generateAppointmentsSlotsDatesRange } from '@/app/utils'
 import { AppointmentSlot } from '@/components/appointments/appointment-slot'
+import { useAppointmentsSlots } from '@/app/hooks/useAppointmentsSlots'
 
 export const PickAppointmentCard = () => {
-  // ** State
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date())
-  const [selectedSlot, setSelectedSlot] = useState<Date | null>(null)
-  const [slots, setSlots] = useState<Date[]>([])
-
-  // ** Handlers
-  const onSelectSlot = (slot: any) => {
-    setSelectedSlot(slot)
-  }
-
+  // ** Hooks
   const workingHours: WorkingHours = {
     mo: {
       active: '0',
@@ -57,39 +46,23 @@ export const PickAppointmentCard = () => {
 
   const appointments = [
     {
-      date: '2023-09-15 09:00'
+      date: '2023-09-8 09:00'
     }
   ]
 
-  const appointmentAverageTime = 30
+  const { slots, selectedDate, setSelectedSlot, onChangeSelectedDate, selectedSlot, isWorkingDay, isAvailableSlot } =
+    useAppointmentsSlots({
+      appointments,
+      workingHours
+    })
+
+  // ** Handlers
+  const onSelectSlot = (slot: any) => {
+    setSelectedSlot(slot)
+  }
 
   const handleBookAppointment = () => {
     console.log('ss')
-  }
-
-  const getHours = (time: string): number => {
-    return Number(time.split(':')[0])
-  }
-
-  const getMinutes = (time: string): number => {
-    return Number(time.split(':')[1])
-  }
-
-  const onChangeSelectedDate = (date: Date) => {
-    setSelectedDate(date)
-    setSelectedSlot(null)
-
-    // ** Get the slots depending on the selected date and the working hours
-    const day = moment(date).format('ddd').toLocaleLowerCase().slice(0, 2)
-    const dayWorkingHours = workingHours[day]
-    const firstSlotAsDate = new Date(
-      date.setHours(getHours(dayWorkingHours['from']), getMinutes(dayWorkingHours['from']), 0)
-    )
-    const lastSlotAsDate = new Date(
-      date.setHours(getHours(dayWorkingHours['to']), getMinutes(dayWorkingHours['to']), 0)
-    )
-
-    setSlots(generateAppointmentsSlotsDatesRange(firstSlotAsDate, lastSlotAsDate, appointmentAverageTime))
   }
 
   return (
@@ -105,6 +78,7 @@ export const PickAppointmentCard = () => {
             showMonthDropdown
             className='btn btn-primary outline-none  my-4'
             minDate={new Date()}
+            filterDate={isWorkingDay}
           />
         </div>
       </div>
@@ -113,16 +87,14 @@ export const PickAppointmentCard = () => {
       {slots.length ? (
         <div className='grid grid-cols-8 gap-4 mt-2 transition ease-in-out  duration-100 '>
           {slots.map((slot, idx) => {
-            const isAvailable = appointments.find((ap: any) => {
-              return new Date(ap.date).getTime() === slot.getTime()
-            })
+            const isAvailable = isAvailableSlot(slot)
             const isSelected = selectedSlot === slot
 
             return (
               <AppointmentSlot
                 key={idx}
                 date={slot}
-                disabled={Boolean(isAvailable)}
+                disabled={isAvailable}
                 isSelected={isSelected}
                 onClick={() => onSelectSlot(slot)}
               />

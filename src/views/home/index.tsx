@@ -26,8 +26,6 @@ export const HomePageView = () => {
     return <p>loading</p>
   }
 
-  console.log('ss', homePageQuery.data)
-
   const cities: City[] = homePageQuery.data?.data.data.cities
   const specializations: Specialization[] = homePageQuery.data?.data.data.specializations
   const topDoctors: Doctor[] = homePageQuery.data?.data.data.doctors.splice(0, 4)

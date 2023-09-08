@@ -21,4 +21,5 @@ export type AuthValuesType = {
   setLoading: (value: boolean) => void
   setUser: (value: UserDataType | null) => void
   login: (params: LoginParams) => Promise<any>
+  isLoggedIn: boolean
 }

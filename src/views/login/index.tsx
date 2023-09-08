@@ -5,7 +5,8 @@ import { TextInput } from '@/components/form-elements/text-input'
 import { Button } from '@/components/ui/button'
 import { LoginInputs } from '@/types/others'
 import { useMutation } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 export const LoginPageView = () => {
   // ** States
@@ -15,12 +16,13 @@ export const LoginPageView = () => {
   })
 
   // ** Hooks
-  const { login } = useAuth()
+  const { isLoggedIn, login } = useAuth()
   const mutation = useMutation({
     mutationFn: () => {
       return login(loginInputs)
     }
   })
+  const router = useRouter()
 
   // ** Conditions
   const disableLogin = !loginInputs.email || !loginInputs.password
@@ -34,6 +36,12 @@ export const LoginPageView = () => {
     e.preventDefault()
     mutation.mutate()
   }
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push('/')
+    }
+  }, [isLoggedIn, router])
 
   return (
     <div className='hero min-h-screen bg-base-200'>

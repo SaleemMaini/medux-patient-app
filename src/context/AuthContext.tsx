@@ -17,7 +17,8 @@ const defaultProvider: AuthValuesType = {
   setUser: () => null,
   setLoading: () => Boolean,
   login: () => Promise.resolve(),
-  logout: () => Promise.resolve()
+  logout: () => Promise.resolve(),
+  isLoggedIn: false
 }
 
 const AuthContext = createContext(defaultProvider)
@@ -89,8 +90,7 @@ const AuthProvider = ({ children }: Props) => {
 
   const handleLogout = () => {
     setUser(null)
-    window.localStorage.removeItem('userData')
-    window.localStorage.removeItem('token')
+    window.localStorage.clear()
     router.push('/login')
   }
 
@@ -100,7 +100,8 @@ const AuthProvider = ({ children }: Props) => {
     setUser,
     setLoading,
     login: handleLogin,
-    logout: handleLogout
+    logout: handleLogout,
+    isLoggedIn: Boolean(user)
   }
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>

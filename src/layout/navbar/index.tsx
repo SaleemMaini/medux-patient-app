@@ -1,3 +1,4 @@
+import { UserAvatar } from '@/components/user-avatar'
 import Link from 'next/link'
 
 type Navigation = {
@@ -49,6 +50,7 @@ export const Navbar = () => {
         </Link>
       </div>
 
+      {/* Navigation Menu */}
       <div className='navbar-center hidden lg:flex'>
         <ul className='menu menu-horizontal px-1'>
           {navigation.map(n => (
@@ -59,12 +61,8 @@ export const Navbar = () => {
         </ul>
       </div>
 
-      {/* Login Button */}
-      <div className='navbar-end'>
-        <Link href='/login' className='btn btn-sm'>
-          login
-        </Link>
-      </div>
+      {/* User Avatar */}
+      <UserAvatar />
     </div>
   )
 }

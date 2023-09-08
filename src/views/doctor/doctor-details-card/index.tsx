@@ -5,7 +5,7 @@ import { Alert } from '@/components/ui/alert'
 import { Doctor } from '@/types/doctors'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
-import { useEffect } from 'react'
+import { ReactNode, useEffect } from 'react'
 import { FaLocationDot, FaUserDoctor } from 'react-icons/fa6'
 
 export const DoctorDetailsCard = () => {
@@ -18,6 +18,10 @@ export const DoctorDetailsCard = () => {
 
   const data: Doctor = doctorDetailsQuery.data?.data?.data.doctor
 
+  const Wrapper = ({ children }: { children: ReactNode }) => {
+    return <div className='card w-full card-side bg-base-100 shadow-xl min-h-fit items-center p-5'>{children}</div>
+  }
+
   useEffect(() => {
     doctorDetailsQuery.refetch()
 
@@ -25,18 +29,24 @@ export const DoctorDetailsCard = () => {
   }, [])
 
   if (doctorDetailsQuery.isLoading) {
-    return <p>loading..</p>
+    return (
+      <Wrapper>
+        <div className='w-full text-center'>
+          <span className='loading loading-spinner text-primary loading-lg' />
+        </div>
+      </Wrapper>
+    )
   }
 
   if (doctorDetailsQuery.isSuccess && data) {
     // ** Destructure
-    const { avatar, name,  city, district, specialization, summary } = data
+    const { avatar, name, city, district, specialization, summary } = data
 
     // ** Vars
     const location = `${district?.name}, ${city?.name}`
 
     return (
-      <div className='card w-full card-side bg-base-100 shadow-xl min-h-fit items-center p-5'>
+      <Wrapper>
         {/* Avatar */}
         <div className='h-48 min-w-fit'>
           <img src={avatar} alt={name} className='object-cover h-full w-full rounded-2xl' />
@@ -62,7 +72,7 @@ export const DoctorDetailsCard = () => {
           {/* Description */}
           <p>{summary}</p>
         </div>
-      </div>
+      </Wrapper>
     )
   }
 

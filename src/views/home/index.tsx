@@ -23,7 +23,11 @@ export const HomePageView = () => {
   }, [])
 
   if (homePageQuery.isLoading) {
-    return <p>loading</p>
+    return (
+      <div className='w-full text-center min-h-screen flex items-center justify-center'>
+        <span className='loading loading-spinner text-primary loading-lg' />
+      </div>
+    )
   }
 
   const cities: City[] = homePageQuery.data?.data.data.cities

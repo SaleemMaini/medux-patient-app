@@ -20,3 +20,22 @@ export const getDoctorDetails = (doctorId: number) => {
     `
   })
 }
+
+export const getDoctors = () => {
+  return axios.post(`/`, {
+    query: `query Doctors {
+      doctors {
+          id
+          name
+          specialization {
+              id
+              name
+          }
+          city {
+              id
+              name
+          }
+      }
+  }`
+  })
+}

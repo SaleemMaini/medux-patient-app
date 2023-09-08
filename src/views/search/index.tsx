@@ -1,4 +1,4 @@
-import { SearchFilters } from './search-filters'
+// import { SearchFilters } from './search-filters'
 import { SearchResultsSection } from './search-results'
 
 export const SearchPageView = () => {
@@ -10,9 +10,9 @@ export const SearchPageView = () => {
       </div>
 
       {/* Search Filters */}
-      <div className='basis-1/2'>
+      {/* <div className='basis-1/2'>
         <SearchFilters />
-      </div>
+      </div> */}
     </>
   )
 }

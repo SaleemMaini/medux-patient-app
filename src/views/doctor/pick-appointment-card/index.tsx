@@ -127,7 +127,11 @@ export const PickAppointmentCard = () => {
       </div>
 
       {/* Loading */}
-      {doctorAppointmentsQuery.isLoading ? <p>Loading...</p> : null}
+      {doctorAppointmentsQuery.isLoading ? (
+        <div className='w-full text-center'>
+          <span className='loading loading-spinner text-primary loading-lg' />
+        </div>
+      ) : null}
 
       {/* Available Times Slots */}
       {shouldRenderTheSlots ? (

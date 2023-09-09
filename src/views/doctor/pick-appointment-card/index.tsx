@@ -1,6 +1,5 @@
 'use client'
 import DatePicker from 'react-datepicker'
-import { WorkingHours } from '@/types/appointments'
 import { AppointmentSlot } from '@/components/appointments/appointment-slot'
 import { useAppointmentsSlots } from '@/app/hooks/useAppointmentsSlots'
 import { useAuth } from '@/app/hooks/useAuth'
@@ -12,44 +11,6 @@ import { Button } from '@/components/ui/button'
 import toast from 'react-hot-toast'
 import { Alert } from '@/components/ui/alert'
 import { useEffect } from 'react'
-
-const workingHours: WorkingHours = {
-  mo: {
-    active: '0',
-    from: '10:30',
-    to: '10:30'
-  },
-  tu: {
-    active: '1',
-    from: '09:30',
-    to: '10:30'
-  },
-  we: {
-    active: '1',
-    from: '09:30',
-    to: '10:30'
-  },
-  th: {
-    active: '1',
-    from: '03:30',
-    to: '09:30'
-  },
-  fr: {
-    active: '1',
-    from: '09:00',
-    to: '14:00'
-  },
-  su: {
-    active: '1',
-    from: '09:00',
-    to: '09:30'
-  },
-  sa: {
-    active: '0',
-    from: '09:00',
-    to: '14:00'
-  }
-}
 
 export const PickAppointmentCard = () => {
   // ** Hooks
@@ -68,7 +29,7 @@ export const PickAppointmentCard = () => {
 
   const { slots, selectedDate, setSelectedSlot, onChangeSelectedDate, selectedSlot, isWorkingDay } =
     useAppointmentsSlots({
-      workingHours
+      workingHours: doctorAppointmentsQuery?.data?.data?.data?.doctor?.workingHours || []
     })
   const { isLoggedIn } = useAuth()
   const router = useRouter()

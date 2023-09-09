@@ -30,16 +30,21 @@ export const useAppointmentsSlots = (props: Props) => {
   }
 
   const isWorkingDay = (date: Date) => {
-    const day = moment(date).format('ddd').toLocaleLowerCase().slice(0, 2)
+    const day = moment(date).format('dddd').toLowerCase()
+    const dayWorkingHours = workingHours.find(d => d.day === day)
 
-    return workingHours[day].active === '1'
+    return dayWorkingHours?.active === '1'
   }
 
   const handleGenerateAppointmentSlots = (date: Date) => {
-    const day = moment(date).format('ddd').toLocaleLowerCase().slice(0, 2)
-    const dayWorkingHours = workingHours[day]
+    const day = moment(date).format('dddd').toLowerCase()
+    const dayWorkingHours = workingHours.find(d => d.day === day)
+    if (!dayWorkingHours) {
+      return
+    }
+
     const firstSlotAsDate = new Date(
-      date.setHours(getHours(dayWorkingHours['from']), getMinutes(dayWorkingHours['from']), 0)
+      date.setHours(getHours(dayWorkingHours.from), getMinutes(dayWorkingHours['from']), 0)
     )
     const lastSlotAsDate = new Date(
       date.setHours(getHours(dayWorkingHours['to']), getMinutes(dayWorkingHours['to']), 0)

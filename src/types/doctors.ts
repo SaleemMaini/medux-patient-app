@@ -8,6 +8,8 @@ export type Doctor = {
   city: City
   district: District
   summary: string
+  phone: string
+  email: string
   gender: 'male' | 'female'
   specialization: Pick<Specialization, 'id' | 'name'>
 }

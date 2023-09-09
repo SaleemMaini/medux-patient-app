@@ -40,7 +40,7 @@ export const DoctorCard = (props: Props) => {
           </div>
 
           {/* summary */}
-          <p>{summary}</p>
+          <p>{summary?.slice(0, 50)}...</p>
 
           {/* Call To Action */}
           <div className='card-actions'>

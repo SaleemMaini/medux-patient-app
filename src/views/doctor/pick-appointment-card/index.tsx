@@ -65,80 +65,86 @@ export const PickAppointmentCard = () => {
   const noData = !slots.length && doctorAppointmentsQuery.isSuccess && selectedDate
 
   return (
-    <div className='card w-full bg-base-100 shadow-xl min-h-fit  p-5'>
-      <div className='flex justify-between'>
-        {/* Title */}
-        <p className='card-title text-2xl'>Book Appointment</p>
+    <div className='card w-full bg-base-100 shadow-xl min-h-fit'>
+      <div className='card-body'>
+        <div className='flex justify-between'>
+          {/* Title */}
+          <p className='card-title text-2xl'>Book Appointment</p>
 
-        {/* Date Picker */}
-        {bookAppointmentMutation.isSuccess ? null : (
-          <div>
-            <DatePicker
-              selected={selectedDate}
-              onChange={date => date && onChangeSelectedDate(date)}
-              showMonthDropdown
-              className='btn btn-primary outline-none  my-4 placeholder-white'
-              minDate={new Date()}
-              filterDate={isWorkingDay}
-              disabled={bookAppointmentMutation.isLoading}
-              placeholderText='Select a date'
-            />
-          </div>
-        )}
-      </div>
-
-      {/* Loading */}
-      {doctorAppointmentsQuery.isLoading ? (
-        <div className='w-full text-center'>
-          <span className='loading loading-spinner text-primary loading-lg' />
-        </div>
-      ) : null}
-
-      {/* Available Times Slots */}
-      {shouldRenderTheSlots ? (
-        <div className='grid grid-cols-8 gap-4 mt-2 transition ease-in-out  duration-100 '>
-          {slots.map((slot, idx) => {
-            const isSelected = selectedSlot === slot
-            const isBooked = doctorAppointmentsQuery.data.data?.data?.doctor?.appointments?.find((ap: any) => {
-              return new Date(ap.date).getTime() === new Date(slot.date).getTime()
-            })
-
-            return (
-              <AppointmentSlot
-                key={idx}
-                date={slot.date}
-                disabled={isBooked || bookAppointmentMutation.isLoading}
-                isSelected={isSelected}
-                onClick={() => onSelectSlot(slot)}
+          {/* Date Picker */}
+          {bookAppointmentMutation.isSuccess ? null : (
+            <div>
+              <DatePicker
+                selected={selectedDate}
+                onChange={date => date && onChangeSelectedDate(date)}
+                showMonthDropdown
+                className='btn btn-primary outline-none  my-4 placeholder-white'
+                minDate={new Date()}
+                filterDate={isWorkingDay}
+                disabled={bookAppointmentMutation.isLoading}
+                placeholderText='Select a date'
               />
-            )
-          })}
+            </div>
+          )}
         </div>
-      ) : null}
 
-      {/* Select Date Alert */}
-      {!selectedDate && doctorAppointmentsQuery.isSuccess ? <Alert text='Please Choose a Date!' /> : null}
+        {/* Loading */}
+        {doctorAppointmentsQuery.isLoading ? (
+          <div className='w-full text-center'>
+            <span className='loading loading-spinner text-primary loading-lg' />
+          </div>
+        ) : null}
 
-      {/* No Data Alert */}
-      {noData ? <Alert text='Sorry, No Available appointments for this day!' type='warning' /> : null}
+        {/* Available Times Slots */}
+        {shouldRenderTheSlots ? (
+          <div className='grid grid-cols-8 gap-4 mt-2 transition ease-in-out  duration-100 '>
+            {slots.map((slot, idx) => {
+              const isSelected = selectedSlot === slot
+              const isBooked = doctorAppointmentsQuery.data.data?.data?.doctor?.appointments?.find((ap: any) => {
+                return new Date(ap.date).getTime() === new Date(slot.date).getTime()
+              })
 
-      {/* Appointment Booked Message */}
-      {bookAppointmentMutation.isSuccess ? (
-        <Alert
-          text={`your appointment at (${bookAppointmentMutation.data.data.data.createAppointment.date}) booked successfully.`}
-          className='mt-3'
-          type='success'
-        />
-      ) : null}
+              return (
+                <AppointmentSlot
+                  key={idx}
+                  date={slot.date}
+                  disabled={isBooked || bookAppointmentMutation.isLoading}
+                  isSelected={isSelected}
+                  onClick={() => onSelectSlot(slot)}
+                />
+              )
+            })}
+          </div>
+        ) : null}
 
-      {/* Book Now Button */}
-      {!bookAppointmentMutation.isSuccess && selectedDate ? (
-        <div className='divider mt-12'>
-          <Button loading={bookAppointmentMutation.isLoading} onClick={handleBookAppointment} disabled={!selectedSlot}>
-            Book Now
-          </Button>
-        </div>
-      ) : null}
+        {/* Select Date Alert */}
+        {!selectedDate && doctorAppointmentsQuery.isSuccess ? <Alert text='Please Choose a Date!' /> : null}
+
+        {/* No Data Alert */}
+        {noData ? <Alert text='Sorry, No Available appointments for this day!' type='warning' /> : null}
+
+        {/* Appointment Booked Message */}
+        {bookAppointmentMutation.isSuccess ? (
+          <Alert
+            text={`your appointment at (${bookAppointmentMutation.data.data.data.createAppointment.date}) booked successfully.`}
+            className='mt-3'
+            type='success'
+          />
+        ) : null}
+
+        {/* Book Now Button */}
+        {!bookAppointmentMutation.isSuccess && selectedDate ? (
+          <div className='divider mt-12'>
+            <Button
+              loading={bookAppointmentMutation.isLoading}
+              onClick={handleBookAppointment}
+              disabled={!selectedSlot}
+            >
+              Book Now
+            </Button>
+          </div>
+        ) : null}
+      </div>
     </div>
   )
 }

@@ -21,6 +21,8 @@ export const getDoctorDetails = (doctorId: number) => {
         }
         summary
         avatar
+        phone
+        gender
         fees
         }
     }
@@ -38,10 +40,19 @@ export const getDoctors = () => {
               id
               name
           }
+          district {
+            id
+            name
+        }
           city {
               id
               name
           }
+          summary
+        avatar
+        phone
+        gender
+        fees
       }
   }`
   })

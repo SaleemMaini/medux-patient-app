@@ -6,7 +6,7 @@ import { Doctor } from '@/types/doctors'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { ReactNode, useEffect } from 'react'
-import { FaLocationDot, FaUserDoctor } from 'react-icons/fa6'
+import { FaLocationDot, FaMailchimp, FaPhone, FaRegEnvelope, FaUserDoctor } from 'react-icons/fa6'
 
 export const DoctorDetailsCard = () => {
   // ** Hooks
@@ -40,7 +40,7 @@ export const DoctorDetailsCard = () => {
 
   if (doctorDetailsQuery.isSuccess && data) {
     // ** Destructure
-    const { avatar, name, city, district, specialization, summary } = data
+    const { avatar, name, city, district, specialization, summary, phone, email } = data
 
     // ** Vars
     const location = `${district?.name}, ${city?.name}`
@@ -48,7 +48,7 @@ export const DoctorDetailsCard = () => {
     return (
       <Wrapper>
         {/* Avatar */}
-        <div className='h-48 min-w-fit'>
+        <div className='p-3 h-48 min-w-fit'>
           <img src={avatar} alt={name} className='object-cover h-full w-full rounded-2xl' />
         </div>
 
@@ -57,19 +57,32 @@ export const DoctorDetailsCard = () => {
           {/* Name */}
           <h2 className='card-title text-3xl'>{name}</h2>
 
-          {/* Location  */}
+          {/* Specialization */}
           <div className='flex items-center gap-2'>
             <FaUserDoctor />
             <span>{specialization.name}</span>
           </div>
 
-          {/* Specialization */}
-          <div className='flex items-center gap-2'>
-            <FaLocationDot />
-            <span>{location}</span>
+          <div className='flex gap-8'>
+            {/* Location  */}
+            <div className='flex items-center gap-2'>
+              <FaLocationDot />
+              <span>{location}</span>
+            </div>
+            {/* Phone  */}
+            <div className='flex items-center gap-2'>
+              <FaPhone />
+              <span>{phone}</span>
+            </div>
+
+            {/* Email  */}
+            <div className='flex items-center gap-2'>
+              <FaRegEnvelope />
+              <span>{email}</span>
+            </div>
           </div>
 
-          {/* Description */}
+          {/* Summary */}
           <p>{summary}</p>
         </div>
       </Wrapper>

@@ -15,6 +15,13 @@ export const getDoctorDetails = (doctorId: number) => {
               id
               name
           }
+          district {
+            id
+            name
+        }
+        summary
+        avatar
+        fees
         }
     }
     `

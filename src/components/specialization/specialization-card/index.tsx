@@ -8,13 +8,13 @@ type Props = {
 export const SpecializationCard = (props: Props) => {
   // ** Props
   const { data } = props
-  const { img, name, description } = data
+  const { image, name, description } = data
 
   return (
     <div className='card w-full bg-base-100 shadow-xl min-h-fit hover:-translate-y-2 transition duration-200 cursor-pointer'>
       {/* Image */}
       <div className='h-64'>
-        <img src={img} alt={name} className='object-cover h-full w-full rounded-t-2xl' />
+        <img src={image} alt={name} className='object-cover h-full w-full rounded-t-2xl' />
       </div>
 
       {/* Card Body */}

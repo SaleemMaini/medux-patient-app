@@ -6,6 +6,9 @@ export const getHomePageData = () => {
         specializations {
             id
             name
+            summary
+            image
+
         }
         cities {
             id
@@ -22,6 +25,14 @@ export const getHomePageData = () => {
                 id
                 name
             }
+
+            district {
+                id
+                name
+            }
+            summary
+        avatar
+        fees
         }
     }
     `

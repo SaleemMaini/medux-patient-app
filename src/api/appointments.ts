@@ -20,7 +20,12 @@ export const getDoctorAppointments = (doctorId: number) => {
               id
               date
           }
-          workingHours
+          workingHours {
+            day
+            active
+            from
+            to
+        }
       }
   }
   `

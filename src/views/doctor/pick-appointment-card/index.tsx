@@ -138,7 +138,7 @@ export const PickAppointmentCard = () => {
         <div className='grid grid-cols-8 gap-4 mt-2 transition ease-in-out  duration-100 '>
           {slots.map((slot, idx) => {
             const isSelected = selectedSlot === slot
-            const isBooked = doctorAppointmentsQuery.data.data?.data.doctor.appointments.find((ap: any) => {
+            const isBooked = doctorAppointmentsQuery.data.data?.data?.doctor?.appointments?.find((ap: any) => {
               return new Date(ap.date).getTime() === new Date(slot.date).getTime()
             })
 
